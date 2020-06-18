@@ -65,6 +65,7 @@ void loop() {
 
   for(int i = 0; i < networksListSize; i++){
     Serial.println(WiFi.SSID(i) + " " + WiFi.RSSI(i));
+    deauthDevice(WiFi.BSSID(i), WiFi.channel(i));
   }
   
   Serial.println("");
