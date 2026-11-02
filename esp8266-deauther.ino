@@ -6,7 +6,7 @@
  * 2-3:   duration
  * 4-9:   receiver address (broadcast)
  * 10-15: source address
- * 16-21: BSSID 
+ * 16-21: BSSID
  * 22-23: sequence number
  * 24-25: reason code (1 is unspecified reason)
  */
@@ -36,6 +36,8 @@ bool sendPacket(uint8_t* packet, uint16_t packetSize, uint8_t wifi_channel, uint
 bool deauthDevice(uint8_t* mac, uint8_t wifi_channel) {
 
     bool success = false;
+    
+    packet[0] = 0xC0;
 
     memcpy(&packet[10], mac, 6);
     memcpy(&packet[16], mac, 6);
@@ -58,6 +60,8 @@ bool deauthDevice(uint8_t* mac, uint8_t wifi_channel) {
 
 void setup() {
   Serial.begin(115200);
+  WiFi.mode(WIFI_STA);
+  WiFi.disconnect();
 }
  
 void loop() {
